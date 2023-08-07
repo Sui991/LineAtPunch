@@ -12,7 +12,7 @@ namespace TT.Models
 
         public void SaveResetTokenToDatabase(string email, string resetToken)
         {
-            // 將權杖+用戶電子信箱存到資料庫
+            // 將token+用戶電子信箱存到資料庫
         }
 
         public void SendResetLinkEmail(string emails, string resetToken)

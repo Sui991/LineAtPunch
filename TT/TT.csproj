@@ -162,6 +162,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\PunchEditController.cs" />
+    <Compile Include="Controllers\CreatePunchController.cs" />
     <Compile Include="Controllers\ForgetPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountEditController.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="Models\Model_AccountEdit.cs" />
     <Compile Include="Models\Model_Login.cs" />
     <Compile Include="Models\Model_PasswordReset.cs" />
+    <Compile Include="Models\Model_PunchRecordEdit.cs" />
     <Compile Include="Models\Model_PunchRecordCreate.cs" />
     <Compile Include="Models\Model_PunchRecordSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

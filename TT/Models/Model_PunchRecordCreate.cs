@@ -8,22 +8,32 @@ namespace TT.Models
     public class Model_PunchRecordCreate
     {
         private LineAtDBEntities DB = new LineAtDBEntities();
-        public PunchRecord_Table CreatePunchTable { set; get; }
+ PunchRecord_Table punch { get; set; }
+        public Model_PunchRecordCreate()
+        {
+        }
+        public override string ToString()
+        {
 
-        
-        
-    //public string CreatePunch()
-    //{
-    //    PunchRecord_Table newData = new PunchRecord_Table()
-    //    {
+            return String.Format("address: {0},notes:: {1},img:{2},A_ID:{3},type:{4},id:{5},datetime:{6}",punch.address,punch.notes,punch.img,punch.A_ID,punch.type,punch.id,punch.datetime);
+        }
 
+        public void CreatePunch(PunchRecord_Table punchRecord_Table)
+        {
             
-    //    }
-    //    return "Hi";
-    //}
+            punchRecord_Table.datetime = DateTime.Now;
+            punch = punchRecord_Table;
+            DB.PunchRecord_Table.Add(punch);
+            DB.SaveChanges();
+        }
+       
+        
+         
+        }
+   
+        }
 
 
 
-    }
+   
 
-}
