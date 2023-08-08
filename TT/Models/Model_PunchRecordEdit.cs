@@ -39,11 +39,7 @@ namespace TT.Models
             }
             DB.SaveChanges();
         }
-       
-        
-         
         }
-   
         }
 
 
