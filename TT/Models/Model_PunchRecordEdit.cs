@@ -19,23 +19,23 @@ namespace TT.Models
         //}
         public void GetPunchData(string employeeID,int id)
         {
-            this.UpdateData = DB.PunchRecord_Table.Where(x => x.A_ID == employeeID && x.id==id).FirstOrDefault();
+            this.UpdateData = DB.PunchRecord_Table.Where(x => x.punch_employeeID == employeeID && x.punch_id==id).FirstOrDefault();
         }
         public void EditPunch(string notes,byte[] img ,string type)
         {
             if (notes != null)
             {
-                this.UpdateData.notes = notes;
+                this.UpdateData.punch_notes = notes;
             }
             
             if (img != null)
             {
-                this.UpdateData.img = img;
+                this.UpdateData.punch_img = img;
             }
 
             if (type != null)
             {
-                this.UpdateData.type = type;
+                this.UpdateData.punch_type = type;
             }
             DB.SaveChanges();
         }

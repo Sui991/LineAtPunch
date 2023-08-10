@@ -14,11 +14,11 @@ namespace TT.Controllers
        
         [HttpPut]
 
-        public PunchRecord_Table PunchEdit(int id ,string employeeID,string notes, byte[] img, string type)
+        public PunchRecord_Table PunchEdit(int intID ,string strEmployeeID,string strNotes, byte[] img, string strType )
         {
             Model_PunchRecordEdit model_punchRecordEdit = new Model_PunchRecordEdit();
-            model_punchRecordEdit.GetPunchData(employeeID, id);
-            model_punchRecordEdit.EditPunch(notes, img, type);
+            model_punchRecordEdit.GetPunchData(strEmployeeID, intID);
+            model_punchRecordEdit.EditPunch(strNotes, img, strType);
             var EditedResult = model_punchRecordEdit.UpdateData;
             return EditedResult;
         }

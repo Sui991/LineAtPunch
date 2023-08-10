@@ -10,19 +10,56 @@
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="memberType_id" ColumnName="memberType_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailRecord_Table">
+      <EntityTypeMapping TypeName="LineAtDBModel.MailRecord_Table">
+        <MappingFragment StoreEntitySet="MailRecord_Table">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="mail_datetime" ColumnName="mail_datetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="member_type">
+      <EntityTypeMapping TypeName="LineAtDBModel.member_type">
+        <MappingFragment StoreEntitySet="member_type">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="memberType" ColumnName="memberType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PasswordResetTable">
+      <EntityTypeMapping TypeName="LineAtDBModel.PasswordResetTable">
+        <MappingFragment StoreEntitySet="PasswordResetTable">
+          <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+          <ScalarProperty Name="Login_token" ColumnName="Login_token" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PunchRecord_Table">
       <EntityTypeMapping TypeName="LineAtDBModel.PunchRecord_Table">
         <MappingFragment StoreEntitySet="PunchRecord_Table">
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="notes" ColumnName="notes" />
-          <ScalarProperty Name="img" ColumnName="img" />
-          <ScalarProperty Name="A_ID" ColumnName="A_ID" />
-          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="punch_addr" ColumnName="punch_addr" />
+          <ScalarProperty Name="punch_notes" ColumnName="punch_notes" />
+          <ScalarProperty Name="punch_employee_id" ColumnName="punch_employee_id" />
+          <ScalarProperty Name="punch_type_id" ColumnName="punch_type_id" />
+          <ScalarProperty Name="punch_id" ColumnName="punch_id" />
+          <ScalarProperty Name="punch_datetime" ColumnName="punch_datetime" />
+          <ScalarProperty Name="punch_img" ColumnName="punch_img" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="punchType_Table">
+      <EntityTypeMapping TypeName="LineAtDBModel.punchType_Table">
+        <MappingFragment StoreEntitySet="punchType_Table">
+          <ScalarProperty Name="punch_type" ColumnName="punch_type" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="datetime" ColumnName="datetime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -37,29 +74,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="LineAtDBModel.Store.sp_alterdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="LineAtDBModel.Store.sp_creatediagram" />
-    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="LineAtDBModel.Store.sp_dropdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="LineAtDBModel.Store.sp_helpdiagramdefinition">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LineAtDBModel.sp_helpdiagramdefinition_Result">
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="LineAtDBModel.Store.sp_helpdiagrams">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="LineAtDBModel.sp_helpdiagrams_Result">
-          <ScalarProperty Name="Database" ColumnName="Database" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Owner" ColumnName="Owner" />
-          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="LineAtDBModel.Store.sp_renamediagram" />
-    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="LineAtDBModel.Store.sp_upgraddiagrams" />
   </EntityContainerMapping>
 </Mapping>

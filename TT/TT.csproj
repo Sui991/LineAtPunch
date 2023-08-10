@@ -45,17 +45,42 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=30.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.30.0.1\lib\net47\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.0.0\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.0\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -188,13 +213,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LineAtDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EFModels\MailRecord_Table.cs">
+      <DependentUpon>LineAtDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EFModels\member_type.cs">
+      <DependentUpon>LineAtDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EFModels\PasswordResetTable.cs">
+      <DependentUpon>LineAtDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EFModels\PunchRecord_Table.cs">
       <DependentUpon>LineAtDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EFModels\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>LineAtDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EFModels\sp_helpdiagrams_Result.cs">
+    <Compile Include="EFModels\punchType_Table.cs">
       <DependentUpon>LineAtDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EFModels\sysdiagrams.cs">
@@ -221,8 +252,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="EFModels\LineAtDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>LineAtDB.Context.cs</LastGenOutput>
       <DependentUpon>LineAtDB.edmx</DependentUpon>
+      <LastGenOutput>LineAtDB.Context.cs</LastGenOutput>
     </Content>
     <Content Include="EFModels\LineAtDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -253,6 +284,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="app.manifest" />
     <EntityDeploy Include="EFModels\LineAtDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LineAtDB.Designer.cs</LastGenOutput>
@@ -260,7 +292,6 @@
     <Content Include="EFModels\LineAtDB.edmx.diagram">
       <DependentUpon>LineAtDB.edmx</DependentUpon>
     </Content>
-    <Content Include="app.manifest" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

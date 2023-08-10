@@ -11,7 +11,7 @@ namespace TT.Models
         public void SendMail(string emails, string title, string content/*, string paths*/)
         {
             var mail = new MailMessage();
-
+            
             // 收件人 Email 地址
             foreach (var email in emails.Split(','))
             {

@@ -14,12 +14,15 @@ namespace TT.EFModels
     
     public partial class PunchRecord_Table
     {
-        public string address { get; set; }
-        public string notes { get; set; }
-        public byte[] img { get; set; }
-        public string A_ID { get; set; }
-        public string type { get; set; }
-        public int id { get; set; }
-        public System.DateTime datetime { get; set; }
+        public string punch_addr { get; set; }
+        public string punch_notes { get; set; }
+        public int punch_employee_id { get; set; }
+        public int punch_type_id { get; set; }
+        public int punch_id { get; set; }
+        public System.DateTime punch_datetime { get; set; }
+        public string punch_img { get; set; }
+    
+        public virtual Account_DataTable Account_DataTable { get; set; }
+        public virtual punchType_Table punchType_Table { get; set; }
     }
 }

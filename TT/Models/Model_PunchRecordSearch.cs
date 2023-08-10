@@ -20,17 +20,12 @@ namespace TT.Models
             
         }
 
-        public string init()
-        {
-
-
-            return "";
-        }
+    
       public string GetAllRecord(string employeeID)
         {
             try
             {
-                this.Log_List = DB.PunchRecord_Table.Where(a => a.A_ID == employeeID).ToList();
+                this.Log_List = DB.PunchRecord_Table.Where(a => a.punch_employeeID == employeeID).ToList();
             }
             catch (Exception e)
             {
@@ -44,7 +39,7 @@ namespace TT.Models
 
             try
             {
-                this.Log_List = DB.PunchRecord_Table.Where(a => a.id == id).ToList();
+                this.Log_List = DB.PunchRecord_Table.Where(a => a.punch_id == id).ToList();
             }
             catch(Exception e )
             {

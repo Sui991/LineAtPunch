@@ -14,11 +14,11 @@ namespace TT.Controllers
       
         [HttpGet, ActionName("GetAllPersonalPunchRecord")]
 
-        public List<PunchRecord_Table> GetAllPersonalPunchRecord(string employeeID)
+        public List<PunchRecord_Table> GetAllPersonalPunchRecord(string strEmployeeID)
         {
             Model_PunchRecordSearch model_PRSearch = new Model_PunchRecordSearch();
 
-            model_PRSearch.GetAllRecord(employeeID);
+            model_PRSearch.GetAllRecord(strEmployeeID);
             var result = model_PRSearch.Log_List;
             return result;
         }

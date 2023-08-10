@@ -14,11 +14,11 @@ namespace TT.Controllers
        
         [HttpPut]
 
-        public Account_DataTable AccountEdit(string employeeID, string NewPassword, string NewPhoneNumber, string NewEmail)
+        public Account_DataTable AccountEdit(string strEmployeeID, string strNewPassword, string strNewPhoneNumber, string strNewEmail)
         {
             Model_AccountEdit model_AccountEdit = new Model_AccountEdit();
-            model_AccountEdit.GetAccount(employeeID);
-            model_AccountEdit.EditAccount(NewPassword, NewPhoneNumber, NewEmail);
+            model_AccountEdit.GetAccount(strEmployeeID);
+            model_AccountEdit.EditAccount(strNewPassword, strNewPhoneNumber, strNewEmail);
             var EditedResult = model_AccountEdit.UpdateData;
             return EditedResult;
         }

@@ -172,7 +172,7 @@ foreach (var complex in typeMapper.GetItemsToGenerate<ComplexType>(itemCollectio
     <#=codeStringGenerator.Property(edmProperty)#>
 <#
         }
-    }https://localhost:44320/EFModels/PunchRecord_Table.cs
+    }
 #>
 }
 <#

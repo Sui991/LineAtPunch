@@ -2,7 +2,7 @@
 <Schema Namespace="LineAtDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Account_DataTable">
     <Key>
-      <PropertyRef Name="Employee_Id" />
+      <PropertyRef Name="id" />
     </Key>
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -10,18 +10,61 @@
     <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="memberType_id" Type="Int32" />
+    <NavigationProperty Name="member_type" Relationship="Self.FK_Account_DataTable_member" FromRole="Account_DataTable" ToRole="member_type" />
+    <NavigationProperty Name="punchType_Table" Relationship="Self.FK_Account_DataTable_punchType_Table" FromRole="Account_DataTable" ToRole="punchType_Table" />
+    <NavigationProperty Name="PunchRecord_Table" Relationship="Self.FK_PunchRecord_employeeid" FromRole="Account_DataTable" ToRole="PunchRecord_Table" />
   </EntityType>
-  <EntityType Name="PunchRecord_Table">
+  <EntityType Name="MailRecord_Table">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="img" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="A_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="datetime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mail_datetime" Type="DateTime" Precision="7" />
+    <NavigationProperty Name="MailRecord_Table1" Relationship="Self.FK_MailRecord_Table_MailRecord_Table" FromRole="MailRecord_Table" ToRole="MailRecord_Table1" />
+    <NavigationProperty Name="MailRecord_Table2" Relationship="Self.FK_MailRecord_Table_MailRecord_Table" FromRole="MailRecord_Table1" ToRole="MailRecord_Table" />
+  </EntityType>
+  <EntityType Name="member_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="memberType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account_DataTable" Relationship="Self.FK_Account_DataTable_member" FromRole="member_type" ToRole="Account_DataTable" />
+  </EntityType>
+  <EntityType Name="PasswordResetTable">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="Employee_Id" Type="Int32" />
+    <Property Name="Login_token" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="Int32" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="PunchRecord_Table">
+    <Key>
+      <PropertyRef Name="punch_id" />
+    </Key>
+    <Property Name="punch_addr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="punch_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="punch_employee_id" Type="Int32" Nullable="false" />
+    <Property Name="punch_type_id" Type="Int32" Nullable="false" />
+    <Property Name="punch_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="punch_datetime" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="punch_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account_DataTable" Relationship="Self.FK_PunchRecord_employeeid" FromRole="PunchRecord_Table" ToRole="Account_DataTable" />
+    <NavigationProperty Name="punchType_Table" Relationship="Self.FK_PunchRecord_type_id" FromRole="PunchRecord_Table" ToRole="punchType_Table" />
+  </EntityType>
+  <EntityType Name="punchType_Table">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="punch_type" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Account_DataTable" Relationship="Self.FK_Account_DataTable_punchType_Table" FromRole="punchType_Table" ToRole="Account_DataTable" />
+    <NavigationProperty Name="PunchRecord_Table" Relationship="Self.FK_PunchRecord_type_id" FromRole="punchType_Table" ToRole="PunchRecord_Table" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -33,66 +76,93 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <Association Name="FK_PunchRecordTable_AccountDataTable">
+  <Association Name="FK_Account_DataTable_member">
+    <End Role="member_type" Type="Self.member_type" Multiplicity="0..1" />
+    <End Role="Account_DataTable" Type="Self.Account_DataTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="member_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Account_DataTable">
+        <PropertyRef Name="memberType_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Account_DataTable_punchType_Table">
+    <End Role="punchType_Table" Type="Self.punchType_Table" Multiplicity="0..1" />
+    <End Role="Account_DataTable" Type="Self.Account_DataTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="punchType_Table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Account_DataTable">
+        <PropertyRef Name="memberType_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PunchRecord_employeeid">
     <End Role="Account_DataTable" Type="Self.Account_DataTable" Multiplicity="1" />
     <End Role="PunchRecord_Table" Type="Self.PunchRecord_Table" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Account_DataTable">
-        <PropertyRef Name="Employee_Id" />
+        <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="PunchRecord_Table">
-        <PropertyRef Name="A_ID" />
+        <PropertyRef Name="punch_employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailRecord_Table_MailRecord_Table">
+    <End Role="MailRecord_Table" Type="Self.MailRecord_Table" Multiplicity="1" />
+    <End Role="MailRecord_Table1" Type="Self.MailRecord_Table" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MailRecord_Table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MailRecord_Table1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PunchRecord_type_id">
+    <End Role="punchType_Table" Type="Self.punchType_Table" Multiplicity="1" />
+    <End Role="PunchRecord_Table" Type="Self.PunchRecord_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="punchType_Table">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PunchRecord_Table">
+        <PropertyRef Name="punch_type_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="LineAtDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Account_DataTable" EntityType="Self.Account_DataTable" />
+    <EntitySet Name="MailRecord_Table" EntityType="Self.MailRecord_Table" />
+    <EntitySet Name="member_type" EntityType="Self.member_type" />
+    <EntitySet Name="PasswordResetTable" EntityType="Self.PasswordResetTable" />
     <EntitySet Name="PunchRecord_Table" EntityType="Self.PunchRecord_Table" />
+    <EntitySet Name="punchType_Table" EntityType="Self.punchType_Table" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-    <AssociationSet Name="FK_PunchRecordTable_AccountDataTable" Association="Self.FK_PunchRecordTable_AccountDataTable">
+    <AssociationSet Name="FK_Account_DataTable_member" Association="Self.FK_Account_DataTable_member">
+      <End Role="member_type" EntitySet="member_type" />
+      <End Role="Account_DataTable" EntitySet="Account_DataTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_DataTable_punchType_Table" Association="Self.FK_Account_DataTable_punchType_Table">
+      <End Role="punchType_Table" EntitySet="punchType_Table" />
+      <End Role="Account_DataTable" EntitySet="Account_DataTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PunchRecord_employeeid" Association="Self.FK_PunchRecord_employeeid">
       <End Role="Account_DataTable" EntitySet="Account_DataTable" />
       <End Role="PunchRecord_Table" EntitySet="PunchRecord_Table" />
     </AssociationSet>
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(LineAtDBModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(LineAtDBModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
+    <AssociationSet Name="FK_MailRecord_Table_MailRecord_Table" Association="Self.FK_MailRecord_Table_MailRecord_Table">
+      <End Role="MailRecord_Table" EntitySet="MailRecord_Table" />
+      <End Role="MailRecord_Table1" EntitySet="MailRecord_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PunchRecord_type_id" Association="Self.FK_PunchRecord_type_id">
+      <End Role="punchType_Table" EntitySet="punchType_Table" />
+      <End Role="PunchRecord_Table" EntitySet="PunchRecord_Table" />
+    </AssociationSet>
   </EntityContainer>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
 </Schema>

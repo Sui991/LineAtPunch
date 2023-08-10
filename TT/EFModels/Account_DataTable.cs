@@ -14,11 +14,24 @@ namespace TT.EFModels
     
     public partial class Account_DataTable
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Account_DataTable()
+        {
+            this.PunchRecord_Table = new HashSet<PunchRecord_Table>();
+        }
+    
         public string Name { get; set; }
         public string Department { get; set; }
         public string Employee_Id { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public int id { get; set; }
+        public Nullable<int> memberType_id { get; set; }
+    
+        public virtual member_type member_type { get; set; }
+        public virtual punchType_Table punchType_Table { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PunchRecord_Table> PunchRecord_Table { get; set; }
     }
 }

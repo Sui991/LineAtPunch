@@ -50,13 +50,13 @@ namespace TT.Controllers
         //}
         [HttpGet]
 
-        public List<PunchRecord_Table> PunchRecordSearch(int id)
+        public List<PunchRecord_Table> PunchRecordSearch(int intID)
         {
             Model_PunchRecordSearch model_PRSearch = new Model_PunchRecordSearch();
 
-            model_PRSearch.Record_Search(id);
+            model_PRSearch.Record_Search(intID);
             var SearchResult = model_PRSearch.Log_List;
-            return SearchResult;
+            return SearchResult;     
         }
 
 
