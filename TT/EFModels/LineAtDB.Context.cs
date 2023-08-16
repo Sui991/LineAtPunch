@@ -25,12 +25,13 @@ namespace TT.EFModels
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account_DataTable> Account_DataTable { get; set; }
+        public virtual DbSet<AccountData_Table> AccountData_Table { get; set; }
         public virtual DbSet<MailRecord_Table> MailRecord_Table { get; set; }
-        public virtual DbSet<member_type> member_type { get; set; }
-        public virtual DbSet<PasswordResetTable> PasswordResetTable { get; set; }
+        public virtual DbSet<MemberType_Table> MemberType_Table { get; set; }
+        public virtual DbSet<PasswordReset_Table> PasswordReset_Table { get; set; }
         public virtual DbSet<PunchRecord_Table> PunchRecord_Table { get; set; }
-        public virtual DbSet<punchType_Table> punchType_Table { get; set; }
+        public virtual DbSet<PunchType_Table> PunchType_Table { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<vw_PunchRecord> vw_PunchRecord { get; set; }
     }
 }

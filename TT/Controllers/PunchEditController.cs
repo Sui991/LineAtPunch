@@ -8,17 +8,18 @@ using TT.EFModels;
 using TT.Models;
 namespace TT.Controllers
 {
+    [RoutePrefix("api/PunchEdit")]
     public class PunchEditController : ApiController
     {
         // GET: PersonalPunchRecord
-       
+        [Route("")]
         [HttpPut]
 
-        public PunchRecord_Table PunchEdit(int intID ,string strEmployeeID,string strNotes, byte[] img, string strType )
+        public PunchRecord_Table PunchEdit(int ID, string EmployeeID, string Notes, string img, int Type)
         {
             Model_PunchRecordEdit model_punchRecordEdit = new Model_PunchRecordEdit();
-            model_punchRecordEdit.GetPunchData(strEmployeeID, intID);
-            model_punchRecordEdit.EditPunch(strNotes, img, strType);
+            model_punchRecordEdit.GetPunchData(EmployeeID, ID);
+            model_punchRecordEdit.EditPunch(Notes, img, Type);
             var EditedResult = model_punchRecordEdit.UpdateData;
             return EditedResult;
         }

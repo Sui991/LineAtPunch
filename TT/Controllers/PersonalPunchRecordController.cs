@@ -8,17 +8,30 @@ using TT.EFModels;
 using TT.Models;
 namespace TT.Controllers
 {
+
+    [JwtAuthActionFilter]
+    [RoutePrefix("api/PersonalPunchRecord")]
     public class PersonalPunchRecordController : ApiController
     {
+        Model_PunchRecordSearch model_PRSearch = new Model_PunchRecordSearch();
         // GET: PersonalPunchRecord
-      
-        [HttpGet, ActionName("GetAllPersonalPunchRecord")]
+        [Route("{id:int}")]
+        [HttpGet]
 
-        public List<PunchRecord_Table> GetAllPersonalPunchRecord(string strEmployeeID)
+        public List<vw_PunchRecord> PunchRecordSearch(int id)
         {
-            Model_PunchRecordSearch model_PRSearch = new Model_PunchRecordSearch();
-
-            model_PRSearch.GetAllRecord(strEmployeeID);
+            model_PRSearch.Record_Search(id);
+            var SearchResult = model_PRSearch.Log_List;
+            return SearchResult;
+        }
+        [JwtAuthActionFilter]
+        [HttpGet]
+        [Route("")]
+        public List<vw_PunchRecord> GetAllPunchRecordSearch(string employeeId)
+        {
+            //建立查詢物件
+            //呼叫model中的查詢員工所有打卡紀錄方法
+            model_PRSearch.GetAllRecord(employeeId);
             var result = model_PRSearch.Log_List;
             return result;
         }

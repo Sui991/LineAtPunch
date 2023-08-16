@@ -17,8 +17,5 @@ namespace TT.EFModels
         public int id { get; set; }
         public string email { get; set; }
         public Nullable<System.DateTime> mail_datetime { get; set; }
-    
-        public virtual MailRecord_Table MailRecord_Table1 { get; set; }
-        public virtual MailRecord_Table MailRecord_Table2 { get; set; }
     }
 }

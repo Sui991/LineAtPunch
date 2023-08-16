@@ -54,6 +54,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="jose-jwt, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jose-jwt.4.1.0\lib\net472\jose-jwt.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -86,6 +89,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -188,14 +192,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ExportToCSVController .cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PunchEditController.cs" />
     <Compile Include="Controllers\CreatePunchController.cs" />
     <Compile Include="Controllers\ForgetPasswordController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountEditController.cs" />
     <Compile Include="Controllers\PersonalPunchRecordController.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="EFModels\Account_DataTable.cs">
+    <Compile Include="EFModels\AccountData_Table.cs">
       <DependentUpon>LineAtDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EFModels\LineAtDB.Context.cs">
@@ -216,25 +221,29 @@
     <Compile Include="EFModels\MailRecord_Table.cs">
       <DependentUpon>LineAtDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EFModels\member_type.cs">
+    <Compile Include="EFModels\MemberType_Table.cs">
       <DependentUpon>LineAtDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EFModels\PasswordResetTable.cs">
+    <Compile Include="EFModels\PasswordReset_Table.cs">
       <DependentUpon>LineAtDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EFModels\PunchRecord_Table.cs">
       <DependentUpon>LineAtDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EFModels\punchType_Table.cs">
+    <Compile Include="EFModels\PunchType_Table.cs">
       <DependentUpon>LineAtDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EFModels\sysdiagrams.cs">
+      <DependentUpon>LineAtDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EFModels\vw_PunchRecord.cs">
       <DependentUpon>LineAtDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\GMailAdapter.cs" />
+    <Compile Include="Models\JwtAuthActionFilter.cs" />
     <Compile Include="Models\Model_AccountEdit.cs" />
     <Compile Include="Models\Model_Login.cs" />
     <Compile Include="Models\Model_PasswordReset.cs" />
@@ -242,6 +251,9 @@
     <Compile Include="Models\Model_PunchRecordCreate.cs" />
     <Compile Include="Models\Model_PunchRecordSearch.cs" />
     <Compile Include="Models\Model_WriteToCSV.cs" />
+    <Compile Include="Models\SignInViewModel.cs" />
+    <Compile Include="Models\Token.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

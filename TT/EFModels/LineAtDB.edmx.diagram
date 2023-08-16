@@ -4,19 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="832a08f7d8604fe0ad3453f2d7c7fb82" Name="Diagram1">
-        <EntityTypeShape EntityType="LineAtDBModel.Account_DataTable" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="LineAtDBModel.MailRecord_Table" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LineAtDBModel.member_type" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LineAtDBModel.PasswordResetTable" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LineAtDBModel.PunchRecord_Table" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LineAtDBModel.punchType_Table" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LineAtDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="LineAtDBModel.FK_Account_DataTable_member" ManuallyRouted="false" />
-        <AssociationConnector Association="LineAtDBModel.FK_Account_DataTable_punchType_Table" ManuallyRouted="false" />
-        <AssociationConnector Association="LineAtDBModel.FK_PunchRecord_employeeid" ManuallyRouted="false" />
-        <AssociationConnector Association="LineAtDBModel.FK_MailRecord_Table_MailRecord_Table" ManuallyRouted="false" />
-        <AssociationConnector Association="LineAtDBModel.FK_PunchRecord_type_id" ManuallyRouted="false" />
+      <Diagram DiagramId="a30fa1d4db1342258f4dc22c561a15d7" Name="Diagram1">
+        <EntityTypeShape EntityType="LineAtDBModel.AccountData_Table" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LineAtDBModel.MailRecord_Table" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LineAtDBModel.MemberType_Table" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LineAtDBModel.PasswordReset_Table" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LineAtDBModel.PunchRecord_Table" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LineAtDBModel.PunchType_Table" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LineAtDBModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LineAtDBModel.vw_PunchRecord" Width="1.5" PointX="7.125" PointY="2.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

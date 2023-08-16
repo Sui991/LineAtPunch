@@ -48,36 +48,28 @@ namespace TT.Controllers
 
         //    return Ok("nice job bro");
         //}
-        [HttpGet]
-
-        public List<PunchRecord_Table> PunchRecordSearch(int intID)
-        {
-            Model_PunchRecordSearch model_PRSearch = new Model_PunchRecordSearch();
-
-            model_PRSearch.Record_Search(intID);
-            var SearchResult = model_PRSearch.Log_List;
-            return SearchResult;     
-        }
+           
+        //}
 
 
-        [HttpGet]
+        //[HttpGet]
 
-        public IHttpActionResult Login(string employeeId, string password)
-        {
-            // 查詢該員工帳號是否存在並檢查密碼是否正確
-            Model_Login model_Login = new Model_Login();
+        //public IHttpActionResult Login(string employeeId, string password)
+        //{
+        //    // 查詢該員工帳號是否存在並檢查密碼是否正確
+        //    Model_Login model_Login = new Model_Login();
 
-           var Login_result = model_Login.Login(employeeId, password);
+        //   var Login_result = model_Login.Login(employeeId, password);
 
-            if (Login_result)
-            {
-                return Ok("你好呀");
-            }
-            else
-            {
+        //    if (Login_result)
+        //    {
+        //        return Ok("你好呀");
+        //    }
+        //    else
+        //    {
 
-                return BadRequest("帳號或密碼不正確");
-            }
-        }
+        //        return BadRequest("帳號或密碼不正確");
+        //    }
+        //}
     }
 }

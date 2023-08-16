@@ -10,22 +10,21 @@ namespace TT.Models
     {
         private LineAtDBEntities DB = new LineAtDBEntities();
 
-        public List<PunchRecord_Table> Log_List { get; set; }
-
+        public List<vw_PunchRecord> Log_List { get; set; }
+        
         public Model_PunchRecordSearch()
         {
             
-            this.Log_List = new List<PunchRecord_Table>();
 
             
         }
 
     
-      public string GetAllRecord(string employeeID)
+      public string GetAllRecord(string strEmployeeID)
         {
             try
             {
-                this.Log_List = DB.PunchRecord_Table.Where(a => a.punch_employeeID == employeeID).ToList();
+                this.Log_List = DB.vw_PunchRecord.Where(a => a.vw_employee == strEmployeeID).ToList();
             }
             catch (Exception e)
             {
@@ -39,7 +38,7 @@ namespace TT.Models
 
             try
             {
-                this.Log_List = DB.PunchRecord_Table.Where(a => a.punch_id == id).ToList();
+                this.Log_List = DB.vw_PunchRecord.Where(a => a.id == id).ToList();
             }
             catch(Exception e )
             {

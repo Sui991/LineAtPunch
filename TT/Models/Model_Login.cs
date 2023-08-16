@@ -8,10 +8,10 @@ namespace TT.Models
     public class Model_Login
     {
         private LineAtDBEntities DB = new LineAtDBEntities();
-
-        public Boolean Login(string employeeId,string password)
+        public AccountData_Table employee { get; set; }
+        public Boolean Login(SignInViewModel signInViewModel)
         {
-            Account_DataTable employee = DB.Account_DataTable.FirstOrDefault(a => a.Employee_Id == employeeId && a.Password == password);
+            employee = DB.AccountData_Table.FirstOrDefault(a => a.account_email == signInViewModel.UserEmail && a.account_password == signInViewModel.Password);
             if (employee == null)
             {
                 return false;
@@ -22,9 +22,9 @@ namespace TT.Models
             }
 
         }
-    
-    
+
+
     }
 
-    
+
 }

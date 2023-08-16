@@ -115,3 +115,4 @@ C:\Users\user\source\repos\TT\TT\bin\System.Numerics.Vectors.xml
 C:\Users\user\source\repos\TT\TT\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\user\source\repos\TT\TT\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\user\source\repos\TT\TT\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+C:\Users\user\source\repos\TT\TT\bin\jose-jwt.dll

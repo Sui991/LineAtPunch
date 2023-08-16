@@ -12,21 +12,9 @@ namespace TT.EFModels
     using System;
     using System.Collections.Generic;
     
-    public partial class punchType_Table
+    public partial class PunchType_Table
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public punchType_Table()
-        {
-            this.Account_DataTable = new HashSet<Account_DataTable>();
-            this.PunchRecord_Table = new HashSet<PunchRecord_Table>();
-        }
-    
         public string punch_type { get; set; }
         public int id { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account_DataTable> Account_DataTable { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PunchRecord_Table> PunchRecord_Table { get; set; }
     }
 }

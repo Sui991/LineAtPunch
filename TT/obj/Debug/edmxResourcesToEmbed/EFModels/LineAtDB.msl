@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="LineAtDBModelStoreContainer" CdmEntityContainer="LineAtDBEntities">
-    <EntitySetMapping Name="Account_DataTable">
-      <EntityTypeMapping TypeName="LineAtDBModel.Account_DataTable">
-        <MappingFragment StoreEntitySet="Account_DataTable">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Department" ColumnName="Department" />
-          <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
+    <EntitySetMapping Name="AccountData_Table">
+      <EntityTypeMapping TypeName="LineAtDBModel.AccountData_Table">
+        <MappingFragment StoreEntitySet="AccountData_Table">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="memberType_id" ColumnName="memberType_id" />
+          <ScalarProperty Name="account_name" ColumnName="account_name" />
+          <ScalarProperty Name="account_department" ColumnName="account_department" />
+          <ScalarProperty Name="account_employee_id" ColumnName="account_employee_id" />
+          <ScalarProperty Name="account_phone" ColumnName="account_phone" />
+          <ScalarProperty Name="account_email" ColumnName="account_email" />
+          <ScalarProperty Name="account_password" ColumnName="account_password" />
+          <ScalarProperty Name="accountType_id" ColumnName="accountType_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -24,17 +24,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="member_type">
-      <EntityTypeMapping TypeName="LineAtDBModel.member_type">
-        <MappingFragment StoreEntitySet="member_type">
+    <EntitySetMapping Name="MemberType_Table">
+      <EntityTypeMapping TypeName="LineAtDBModel.MemberType_Table">
+        <MappingFragment StoreEntitySet="MemberType_Table">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="memberType" ColumnName="memberType" />
+          <ScalarProperty Name="member_type" ColumnName="member_type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PasswordResetTable">
-      <EntityTypeMapping TypeName="LineAtDBModel.PasswordResetTable">
-        <MappingFragment StoreEntitySet="PasswordResetTable">
+    <EntitySetMapping Name="PasswordReset_Table">
+      <EntityTypeMapping TypeName="LineAtDBModel.PasswordReset_Table">
+        <MappingFragment StoreEntitySet="PasswordReset_Table">
           <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
           <ScalarProperty Name="Login_token" ColumnName="Login_token" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -45,19 +45,19 @@
     <EntitySetMapping Name="PunchRecord_Table">
       <EntityTypeMapping TypeName="LineAtDBModel.PunchRecord_Table">
         <MappingFragment StoreEntitySet="PunchRecord_Table">
+          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="punch_addr" ColumnName="punch_addr" />
           <ScalarProperty Name="punch_notes" ColumnName="punch_notes" />
           <ScalarProperty Name="punch_employee_id" ColumnName="punch_employee_id" />
           <ScalarProperty Name="punch_type_id" ColumnName="punch_type_id" />
-          <ScalarProperty Name="punch_id" ColumnName="punch_id" />
           <ScalarProperty Name="punch_datetime" ColumnName="punch_datetime" />
           <ScalarProperty Name="punch_img" ColumnName="punch_img" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="punchType_Table">
-      <EntityTypeMapping TypeName="LineAtDBModel.punchType_Table">
-        <MappingFragment StoreEntitySet="punchType_Table">
+    <EntitySetMapping Name="PunchType_Table">
+      <EntityTypeMapping TypeName="LineAtDBModel.PunchType_Table">
+        <MappingFragment StoreEntitySet="PunchType_Table">
           <ScalarProperty Name="punch_type" ColumnName="punch_type" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
@@ -71,6 +71,19 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_PunchRecord">
+      <EntityTypeMapping TypeName="LineAtDBModel.vw_PunchRecord">
+        <MappingFragment StoreEntitySet="vw_PunchRecord">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="vw_datetime" ColumnName="vw_datetime" />
+          <ScalarProperty Name="vw_img" ColumnName="vw_img" />
+          <ScalarProperty Name="vw_notes" ColumnName="vw_notes" />
+          <ScalarProperty Name="vw_addr" ColumnName="vw_addr" />
+          <ScalarProperty Name="vw_type" ColumnName="vw_type" />
+          <ScalarProperty Name="vw_employee" ColumnName="vw_employee" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

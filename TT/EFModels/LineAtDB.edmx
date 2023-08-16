@@ -4,19 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LineAtDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Account_DataTable">
+    <Schema Namespace="LineAtDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountData_Table">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Department" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Employee_Id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PhoneNumber" Type="varchar(max)" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="memberType_id" Type="int" />
+          <Property Name="account_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="account_department" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="account_employee_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="account_phone" Type="varchar(max)" Nullable="false" />
+          <Property Name="account_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="account_password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="accountType_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MailRecord_Table">
           <Key>
@@ -26,14 +26,14 @@
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="mail_datetime" Type="datetime2" Precision="7" />
         </EntityType>
-        <EntityType Name="member_type">
+        <EntityType Name="MemberType_Table">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="memberType" Type="nvarchar" MaxLength="50" />
+          <Property Name="member_type" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="PasswordResetTable">
+        <EntityType Name="PasswordReset_Table">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -44,17 +44,17 @@
         </EntityType>
         <EntityType Name="PunchRecord_Table">
           <Key>
-            <PropertyRef Name="punch_id" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="punch_addr" Type="nvarchar(max)" Nullable="false" />
           <Property Name="punch_notes" Type="nvarchar(max)" />
           <Property Name="punch_employee_id" Type="int" Nullable="false" />
           <Property Name="punch_type_id" Type="int" Nullable="false" />
-          <Property Name="punch_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="punch_datetime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="punch_img" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="punchType_Table">
+        <EntityType Name="PunchType_Table">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -71,115 +71,56 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK_Account_DataTable_member">
-          <End Role="member_type" Type="Self.member_type" Multiplicity="0..1" />
-          <End Role="Account_DataTable" Type="Self.Account_DataTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="member_type">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Account_DataTable">
-              <PropertyRef Name="memberType_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Account_DataTable_punchType_Table">
-          <End Role="punchType_Table" Type="Self.punchType_Table" Multiplicity="0..1" />
-          <End Role="Account_DataTable" Type="Self.Account_DataTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="punchType_Table">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Account_DataTable">
-              <PropertyRef Name="memberType_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MailRecord_Table_MailRecord_Table">
-          <End Role="MailRecord_Table" Type="Self.MailRecord_Table" Multiplicity="1" />
-          <End Role="MailRecord_Table1" Type="Self.MailRecord_Table" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="MailRecord_Table">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="MailRecord_Table1">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PunchRecord_employeeid">
-          <End Role="Account_DataTable" Type="Self.Account_DataTable" Multiplicity="1" />
-          <End Role="PunchRecord_Table" Type="Self.PunchRecord_Table" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account_DataTable">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="PunchRecord_Table">
-              <PropertyRef Name="punch_employee_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PunchRecord_type_id">
-          <End Role="punchType_Table" Type="Self.punchType_Table" Multiplicity="1" />
-          <End Role="PunchRecord_Table" Type="Self.PunchRecord_Table" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="punchType_Table">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="PunchRecord_Table">
-              <PropertyRef Name="punch_type_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="LineAtDBModelStoreContainer">
-          <EntitySet Name="Account_DataTable" EntityType="Self.Account_DataTable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MailRecord_Table" EntityType="Self.MailRecord_Table" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="member_type" EntityType="Self.member_type" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PasswordResetTable" EntityType="Self.PasswordResetTable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PunchRecord_Table" EntityType="Self.PunchRecord_Table" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="punchType_Table" EntityType="Self.punchType_Table" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Account_DataTable_member" Association="Self.FK_Account_DataTable_member">
-            <End Role="member_type" EntitySet="member_type" />
-            <End Role="Account_DataTable" EntitySet="Account_DataTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Account_DataTable_punchType_Table" Association="Self.FK_Account_DataTable_punchType_Table">
-            <End Role="punchType_Table" EntitySet="punchType_Table" />
-            <End Role="Account_DataTable" EntitySet="Account_DataTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MailRecord_Table_MailRecord_Table" Association="Self.FK_MailRecord_Table_MailRecord_Table">
-            <End Role="MailRecord_Table" EntitySet="MailRecord_Table" />
-            <End Role="MailRecord_Table1" EntitySet="MailRecord_Table" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PunchRecord_employeeid" Association="Self.FK_PunchRecord_employeeid">
-            <End Role="Account_DataTable" EntitySet="Account_DataTable" />
-            <End Role="PunchRecord_Table" EntitySet="PunchRecord_Table" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PunchRecord_type_id" Association="Self.FK_PunchRecord_type_id">
-            <End Role="punchType_Table" EntitySet="punchType_Table" />
-            <End Role="PunchRecord_Table" EntitySet="PunchRecord_Table" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="LineAtDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Account_DataTable">
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'LineAtDB.dbo.vw_PunchRecord' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="vw_PunchRecord">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Employee_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vw_employee" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="vw_type" Type="nvarchar" MaxLength="4" />
+          <Property Name="vw_addr" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="vw_notes" Type="nvarchar(max)" />
+          <Property Name="vw_img" Type="nvarchar(max)" />
+          <Property Name="vw_datetime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityContainer Name="LineAtDBModelStoreContainer">
+          <EntitySet Name="AccountData_Table" EntityType="Self.AccountData_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MailRecord_Table" EntityType="Self.MailRecord_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberType_Table" EntityType="Self.MemberType_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PasswordReset_Table" EntityType="Self.PasswordReset_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PunchRecord_Table" EntityType="Self.PunchRecord_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PunchType_Table" EntityType="Self.PunchType_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_PunchRecord" EntityType="Self.vw_PunchRecord" store:Type="Views" Schema="dbo">
+            <!--<DefiningQuery>SELECT 
+    [vw_PunchRecord].[vw_employee] AS [vw_employee], 
+    [vw_PunchRecord].[vw_type] AS [vw_type], 
+    [vw_PunchRecord].[vw_addr] AS [vw_addr], 
+    [vw_PunchRecord].[vw_notes] AS [vw_notes], 
+    [vw_PunchRecord].[vw_img] AS [vw_img], 
+    [vw_PunchRecord].[vw_datetime] AS [vw_datetime], 
+    [vw_PunchRecord].[id] AS [id]
+    FROM [dbo].[vw_PunchRecord] AS [vw_PunchRecord]</DefiningQuery>-->
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LineAtDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountData_Table">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="memberType_id" Type="Int32" />
-          <NavigationProperty Name="member_type" Relationship="Self.FK_Account_DataTable_member" FromRole="Account_DataTable" ToRole="member_type" />
-          <NavigationProperty Name="punchType_Table" Relationship="Self.FK_Account_DataTable_punchType_Table" FromRole="Account_DataTable" ToRole="punchType_Table" />
-          <NavigationProperty Name="PunchRecord_Table" Relationship="Self.FK_PunchRecord_employeeid" FromRole="Account_DataTable" ToRole="PunchRecord_Table" />
+          <Property Name="account_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="account_department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="account_employee_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="account_phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="account_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="account_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="accountType_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="MailRecord_Table">
           <Key>
@@ -188,18 +129,15 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mail_datetime" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="MailRecord_Table1" Relationship="Self.FK_MailRecord_Table_MailRecord_Table" FromRole="MailRecord_Table" ToRole="MailRecord_Table1" />
-          <NavigationProperty Name="MailRecord_Table2" Relationship="Self.FK_MailRecord_Table_MailRecord_Table" FromRole="MailRecord_Table1" ToRole="MailRecord_Table" />
         </EntityType>
-        <EntityType Name="member_type">
+        <EntityType Name="MemberType_Table">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="memberType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Account_DataTable" Relationship="Self.FK_Account_DataTable_member" FromRole="member_type" ToRole="Account_DataTable" />
+          <Property Name="member_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="PasswordResetTable">
+        <EntityType Name="PasswordReset_Table">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -210,26 +148,22 @@
         </EntityType>
         <EntityType Name="PunchRecord_Table">
           <Key>
-            <PropertyRef Name="punch_id" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="punch_addr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="punch_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="punch_employee_id" Type="Int32" Nullable="false" />
           <Property Name="punch_type_id" Type="Int32" Nullable="false" />
-          <Property Name="punch_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="punch_datetime" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="punch_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Account_DataTable" Relationship="Self.FK_PunchRecord_employeeid" FromRole="PunchRecord_Table" ToRole="Account_DataTable" />
-          <NavigationProperty Name="punchType_Table" Relationship="Self.FK_PunchRecord_type_id" FromRole="PunchRecord_Table" ToRole="punchType_Table" />
         </EntityType>
-        <EntityType Name="punchType_Table">
+        <EntityType Name="PunchType_Table">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="punch_type" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Account_DataTable" Relationship="Self.FK_Account_DataTable_punchType_Table" FromRole="punchType_Table" ToRole="Account_DataTable" />
-          <NavigationProperty Name="PunchRecord_Table" Relationship="Self.FK_PunchRecord_type_id" FromRole="punchType_Table" ToRole="PunchRecord_Table" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -241,112 +175,45 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_Account_DataTable_member">
-          <End Role="member_type" Type="Self.member_type" Multiplicity="0..1" />
-          <End Role="Account_DataTable" Type="Self.Account_DataTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="member_type">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Account_DataTable">
-              <PropertyRef Name="memberType_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Account_DataTable_punchType_Table">
-          <End Role="punchType_Table" Type="Self.punchType_Table" Multiplicity="0..1" />
-          <End Role="Account_DataTable" Type="Self.Account_DataTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="punchType_Table">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Account_DataTable">
-              <PropertyRef Name="memberType_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PunchRecord_employeeid">
-          <End Role="Account_DataTable" Type="Self.Account_DataTable" Multiplicity="1" />
-          <End Role="PunchRecord_Table" Type="Self.PunchRecord_Table" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account_DataTable">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="PunchRecord_Table">
-              <PropertyRef Name="punch_employee_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MailRecord_Table_MailRecord_Table">
-          <End Role="MailRecord_Table" Type="Self.MailRecord_Table" Multiplicity="1" />
-          <End Role="MailRecord_Table1" Type="Self.MailRecord_Table" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="MailRecord_Table">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="MailRecord_Table1">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PunchRecord_type_id">
-          <End Role="punchType_Table" Type="Self.punchType_Table" Multiplicity="1" />
-          <End Role="PunchRecord_Table" Type="Self.PunchRecord_Table" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="punchType_Table">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="PunchRecord_Table">
-              <PropertyRef Name="punch_type_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="LineAtDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Account_DataTable" EntityType="Self.Account_DataTable" />
+          <EntitySet Name="AccountData_Table" EntityType="Self.AccountData_Table" />
           <EntitySet Name="MailRecord_Table" EntityType="Self.MailRecord_Table" />
-          <EntitySet Name="member_type" EntityType="Self.member_type" />
-          <EntitySet Name="PasswordResetTable" EntityType="Self.PasswordResetTable" />
+          <EntitySet Name="MemberType_Table" EntityType="Self.MemberType_Table" />
+          <EntitySet Name="PasswordReset_Table" EntityType="Self.PasswordReset_Table" />
           <EntitySet Name="PunchRecord_Table" EntityType="Self.PunchRecord_Table" />
-          <EntitySet Name="punchType_Table" EntityType="Self.punchType_Table" />
+          <EntitySet Name="PunchType_Table" EntityType="Self.PunchType_Table" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_Account_DataTable_member" Association="Self.FK_Account_DataTable_member">
-            <End Role="member_type" EntitySet="member_type" />
-            <End Role="Account_DataTable" EntitySet="Account_DataTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Account_DataTable_punchType_Table" Association="Self.FK_Account_DataTable_punchType_Table">
-            <End Role="punchType_Table" EntitySet="punchType_Table" />
-            <End Role="Account_DataTable" EntitySet="Account_DataTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PunchRecord_employeeid" Association="Self.FK_PunchRecord_employeeid">
-            <End Role="Account_DataTable" EntitySet="Account_DataTable" />
-            <End Role="PunchRecord_Table" EntitySet="PunchRecord_Table" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MailRecord_Table_MailRecord_Table" Association="Self.FK_MailRecord_Table_MailRecord_Table">
-            <End Role="MailRecord_Table" EntitySet="MailRecord_Table" />
-            <End Role="MailRecord_Table1" EntitySet="MailRecord_Table" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PunchRecord_type_id" Association="Self.FK_PunchRecord_type_id">
-            <End Role="punchType_Table" EntitySet="punchType_Table" />
-            <End Role="PunchRecord_Table" EntitySet="PunchRecord_Table" />
-          </AssociationSet>
+          <EntitySet Name="vw_PunchRecord" EntityType="LineAtDBModel.vw_PunchRecord" />
         </EntityContainer>
+        <EntityType Name="vw_PunchRecord">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="vw_employee" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vw_type" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="vw_addr" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vw_notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vw_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vw_datetime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LineAtDBModelStoreContainer" CdmEntityContainer="LineAtDBEntities">
-          <EntitySetMapping Name="Account_DataTable">
-            <EntityTypeMapping TypeName="LineAtDBModel.Account_DataTable">
-              <MappingFragment StoreEntitySet="Account_DataTable">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
+          <EntitySetMapping Name="AccountData_Table">
+            <EntityTypeMapping TypeName="LineAtDBModel.AccountData_Table">
+              <MappingFragment StoreEntitySet="AccountData_Table">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="memberType_id" ColumnName="memberType_id" />
+                <ScalarProperty Name="account_name" ColumnName="account_name" />
+                <ScalarProperty Name="account_department" ColumnName="account_department" />
+                <ScalarProperty Name="account_employee_id" ColumnName="account_employee_id" />
+                <ScalarProperty Name="account_phone" ColumnName="account_phone" />
+                <ScalarProperty Name="account_email" ColumnName="account_email" />
+                <ScalarProperty Name="account_password" ColumnName="account_password" />
+                <ScalarProperty Name="accountType_id" ColumnName="accountType_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -359,17 +226,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="member_type">
-            <EntityTypeMapping TypeName="LineAtDBModel.member_type">
-              <MappingFragment StoreEntitySet="member_type">
+          <EntitySetMapping Name="MemberType_Table">
+            <EntityTypeMapping TypeName="LineAtDBModel.MemberType_Table">
+              <MappingFragment StoreEntitySet="MemberType_Table">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="memberType" ColumnName="memberType" />
+                <ScalarProperty Name="member_type" ColumnName="member_type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PasswordResetTable">
-            <EntityTypeMapping TypeName="LineAtDBModel.PasswordResetTable">
-              <MappingFragment StoreEntitySet="PasswordResetTable">
+          <EntitySetMapping Name="PasswordReset_Table">
+            <EntityTypeMapping TypeName="LineAtDBModel.PasswordReset_Table">
+              <MappingFragment StoreEntitySet="PasswordReset_Table">
                 <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
                 <ScalarProperty Name="Login_token" ColumnName="Login_token" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -380,19 +247,19 @@
           <EntitySetMapping Name="PunchRecord_Table">
             <EntityTypeMapping TypeName="LineAtDBModel.PunchRecord_Table">
               <MappingFragment StoreEntitySet="PunchRecord_Table">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="punch_addr" ColumnName="punch_addr" />
                 <ScalarProperty Name="punch_notes" ColumnName="punch_notes" />
                 <ScalarProperty Name="punch_employee_id" ColumnName="punch_employee_id" />
                 <ScalarProperty Name="punch_type_id" ColumnName="punch_type_id" />
-                <ScalarProperty Name="punch_id" ColumnName="punch_id" />
                 <ScalarProperty Name="punch_datetime" ColumnName="punch_datetime" />
                 <ScalarProperty Name="punch_img" ColumnName="punch_img" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="punchType_Table">
-            <EntityTypeMapping TypeName="LineAtDBModel.punchType_Table">
-              <MappingFragment StoreEntitySet="punchType_Table">
+          <EntitySetMapping Name="PunchType_Table">
+            <EntityTypeMapping TypeName="LineAtDBModel.PunchType_Table">
+              <MappingFragment StoreEntitySet="PunchType_Table">
                 <ScalarProperty Name="punch_type" ColumnName="punch_type" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -406,6 +273,19 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_PunchRecord">
+            <EntityTypeMapping TypeName="LineAtDBModel.vw_PunchRecord">
+              <MappingFragment StoreEntitySet="vw_PunchRecord">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="vw_datetime" ColumnName="vw_datetime" />
+                <ScalarProperty Name="vw_img" ColumnName="vw_img" />
+                <ScalarProperty Name="vw_notes" ColumnName="vw_notes" />
+                <ScalarProperty Name="vw_addr" ColumnName="vw_addr" />
+                <ScalarProperty Name="vw_type" ColumnName="vw_type" />
+                <ScalarProperty Name="vw_employee" ColumnName="vw_employee" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

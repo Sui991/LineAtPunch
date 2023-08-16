@@ -10,8 +10,8 @@ namespace TT.Models
     public class Model_WriteToCSV
     {
         private LineAtDBEntities DB = new LineAtDBEntities();
-      
-          
+
+
         public void WriteToCSV(MemoryStream memoryStream)
         {
             //合併打卡資料表與帳戶資料表成一個新資料表
@@ -34,18 +34,18 @@ namespace TT.Models
             //    });
 
             //LinQ
-            var NewTable = from p in DB.PunchRecord_Table
-                           join a in DB.Account_DataTable on p.punch_employeeID equals a.Employee_Id
+            var NewTable = from p in DB.vw_PunchRecord
+                           join a in DB.AccountData_Table on p.vw_employee equals a.account_employee_id
                            select new
                            {
-                               Name = a.Name,
-                               Department = a.Department,
-                               EmpolyeeID = a.Employee_Id,
-                               Date = p.punch_datetime,
-                               Address = p.punch_addr,
-                               Img = p.punch_img,
-                               Notes = p.punch_notes,
-                               Types = p.punch_type
+                               Name = a.account_name,
+                               Department = a.account_department,
+                               EmpolyeeID = a.account_employee_id,
+                               Date = p.vw_datetime,
+                               Address = p.vw_addr,
+                               Img = p.vw_img,
+                               Notes = p.vw_notes,
+                               Types = p.vw_type
                            };
 
             //foreach (var item in NewTable)
@@ -58,12 +58,12 @@ namespace TT.Models
             {
                 writer.WriteLine($"姓名, 部門, 員工編號, 打卡時間, 打卡地點, 打卡類型, 照片, 備註");
                 foreach (var item in NewTable)
-                    {
-                  
+                {
+
                     writer.WriteLine($"{item.Name},{item.Department},{item.EmpolyeeID},{item.Date}," +
                             $"{item.Address},{item.Types},{item.Img},{item.Notes}");
-                    }
                 }
+            }
         }
 
     }
