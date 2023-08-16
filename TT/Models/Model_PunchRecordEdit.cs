@@ -24,12 +24,12 @@ namespace TT.Models
         }
         public void EditPunch(string notes, string img, int type)
         {
-            if (notes != null)
+            if (!string.IsNullOrEmpty(notes))
             {
                 this.UpdateData.punch_notes = notes;
             }
 
-            if (img != null)
+            if (!string.IsNullOrEmpty(img))
             {
                 this.UpdateData.punch_img = img;
             }

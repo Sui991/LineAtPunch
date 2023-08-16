@@ -22,5 +22,6 @@ namespace TT.EFModels
         public string account_email { get; set; }
         public string account_password { get; set; }
         public int accountType_id { get; set; }
+        public string account_position { get; set; }
     }
 }

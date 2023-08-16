@@ -20,7 +20,7 @@ namespace TT.Models
 
         public void CreatePunch(PunchRecord_Table punchRecord_Table)
         {
-
+            //打卡時間為當下時間
             punchRecord_Table.punch_datetime = DateTime.Now;
             tbl_punch = punchRecord_Table;
             DB.PunchRecord_Table.Add(tbl_punch);

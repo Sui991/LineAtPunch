@@ -4,6 +4,7 @@
     <EntitySetMapping Name="AccountData_Table">
       <EntityTypeMapping TypeName="LineAtDBModel.AccountData_Table">
         <MappingFragment StoreEntitySet="AccountData_Table">
+          <ScalarProperty Name="account_position" ColumnName="account_position" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="account_name" ColumnName="account_name" />
           <ScalarProperty Name="account_department" ColumnName="account_department" />

@@ -16,6 +16,8 @@ namespace TT.Models
         public string refresh_token { get; set; }
         //幾秒過期
         public int expires_in { get; set; }
+
+       
     }
     public class Payload
     {
@@ -23,6 +25,8 @@ namespace TT.Models
         public  User info { get; set; }
         //過期時間
         public int exp { get; set; }
+        public string auth_employeeId { get; set; }
+
     }
     public static class TokenCrypto
     {
@@ -95,7 +99,8 @@ namespace TT.Models
                 //Unix 時間戳
                 exp = Convert.ToInt32(
                     (DateTime.Now.AddSeconds(exp) -
-                     new DateTime(1970, 1, 1)).TotalSeconds)
+                     new DateTime(1970, 1, 1)).TotalSeconds),
+                auth_employeeId = user.auth_employeeId           
             };
 
             var json = JsonConvert.SerializeObject(payload);
@@ -126,15 +131,16 @@ namespace TT.Models
         public User GetUser()
         {
             var token = HttpContext.Current.Request.Headers["Authorization"];
-
+          
+            if (string.IsNullOrEmpty(token))
+            {
+                throw new Exception("請先登入驗證");
+            }
             var split = token.Split('.');
             var iv = split[0];
             var encrypt = split[1];
             var signature = split[2];
-            if (string.IsNullOrEmpty(token))
-            {
-                return null;
-            }
+         
 
 
             //檢查簽章是否正確

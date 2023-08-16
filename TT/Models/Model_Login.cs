@@ -9,9 +9,12 @@ namespace TT.Models
     {
         private LineAtDBEntities DB = new LineAtDBEntities();
         public AccountData_Table employee { get; set; }
+
+        public string auth_employeeid { get; set; }
         public Boolean Login(SignInViewModel signInViewModel)
         {
             employee = DB.AccountData_Table.FirstOrDefault(a => a.account_email == signInViewModel.UserEmail && a.account_password == signInViewModel.Password);
+            auth_employeeid = employee.account_employee_id;
             if (employee == null)
             {
                 return false;

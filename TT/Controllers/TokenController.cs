@@ -38,7 +38,7 @@ namespace TT.Controllers
 throw new Exception("登入失敗，帳號或密碼錯誤");
 
             }
-            var user = new User {Id=c_id+=1,UserEmail=model.employee.account_email,UserName=model.employee.account_name,Identity=Identity.User };
+            var user = new User {Id=c_id+=1,UserEmail=model.employee.account_email,UserName=model.employee.account_name,Identity=Identity.User,auth_employeeId=model.auth_employeeid };
             //產生 Token
             var token = _tokenManager.Create(user);
             //需存入資料庫
@@ -68,16 +68,16 @@ throw new Exception("登入失敗，帳號或密碼錯誤");
         }
 
         //測試是否通過驗證
-        [HttpPost]
-        [Route("isAuthenticated")]
-        public bool IsAuthenticated()
-        {
-            var user = _tokenManager.GetUser();
-            if (user == null)
-            {
-                return false;
-            }
-            return true;
-        }
+        //[HttpPost]
+        //[Route("isAuthenticated")]
+        //public bool IsAuthenticated()
+        //{
+        //    var user = _tokenManager.GetUser();
+        //    if (user == null)
+        //    {
+        //        return false;
+        //    }
+        //    return true;
+        //}
     }
 }

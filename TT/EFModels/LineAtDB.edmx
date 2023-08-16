@@ -17,6 +17,7 @@
           <Property Name="account_email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="account_password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="accountType_id" Type="int" Nullable="false" />
+          <Property Name="account_position" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="MailRecord_Table">
           <Key>
@@ -58,7 +59,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="punch_type" Type="nvarchar" MaxLength="4" />
+          <Property Name="punch_type" Type="nvarchar" MaxLength="50" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -75,6 +76,9 @@
 警告 6002: 資料表/檢視 'LineAtDB.dbo.vw_PunchRecord' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="vw_PunchRecord">
           <Key>
+            
+            
+            
             <PropertyRef Name="id" />
           </Key>
           <Property Name="vw_employee" Type="varchar" MaxLength="50" Nullable="false" />
@@ -93,8 +97,8 @@
           <EntitySet Name="PunchRecord_Table" EntityType="Self.PunchRecord_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PunchType_Table" EntityType="Self.PunchType_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="vw_PunchRecord" EntityType="Self.vw_PunchRecord" store:Type="Views" Schema="dbo">
-            <!--<DefiningQuery>SELECT 
+          <EntitySet Name="vw_PunchRecord" EntityType="Self.vw_PunchRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
     [vw_PunchRecord].[vw_employee] AS [vw_employee], 
     [vw_PunchRecord].[vw_type] AS [vw_type], 
     [vw_PunchRecord].[vw_addr] AS [vw_addr], 
@@ -102,7 +106,7 @@
     [vw_PunchRecord].[vw_img] AS [vw_img], 
     [vw_PunchRecord].[vw_datetime] AS [vw_datetime], 
     [vw_PunchRecord].[id] AS [id]
-    FROM [dbo].[vw_PunchRecord] AS [vw_PunchRecord]</DefiningQuery>-->
+    FROM [dbo].[vw_PunchRecord] AS [vw_PunchRecord]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -121,6 +125,7 @@
           <Property Name="account_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="account_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="accountType_id" Type="Int32" Nullable="false" />
+          <Property Name="account_position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MailRecord_Table">
           <Key>
@@ -162,7 +167,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="punch_type" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="punch_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -206,6 +211,7 @@
           <EntitySetMapping Name="AccountData_Table">
             <EntityTypeMapping TypeName="LineAtDBModel.AccountData_Table">
               <MappingFragment StoreEntitySet="AccountData_Table">
+                <ScalarProperty Name="account_position" ColumnName="account_position" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="account_name" ColumnName="account_name" />
                 <ScalarProperty Name="account_department" ColumnName="account_department" />

@@ -15,6 +15,7 @@ namespace TT.Models
         //名稱
         public string UserName { get; set; }
         //身分
+        public string auth_employeeId { get; set; }
         public Identity Identity { get; set; }
     }
     public enum Identity

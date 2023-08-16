@@ -10,10 +10,11 @@ using TT.Models;
 using System.Text;
 namespace TT.Controllers
 {
+    [JwtAuthActionFilter]
     [RoutePrefix("api/ExportToCSV")]
     public class ExportToCSVController : ApiController
     {
-        // GET: PersonalPunchRecord
+
 
         [Route("")]
         [HttpGet]
@@ -26,7 +27,7 @@ namespace TT.Controllers
 
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new ByteArrayContent(memoryStream.ToArray());
-            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("text/csv");
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("text/csv");//輸出格式
             response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
             response.Content.Headers.ContentDisposition.FileName = "data.csv"; // 檔案名稱
             return ResponseMessage(response);

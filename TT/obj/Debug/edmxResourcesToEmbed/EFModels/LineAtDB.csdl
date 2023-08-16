@@ -12,6 +12,7 @@
     <Property Name="account_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="account_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="accountType_id" Type="Int32" Nullable="false" />
+    <Property Name="account_position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="MailRecord_Table">
     <Key>
@@ -53,7 +54,7 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="punch_type" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="punch_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="sysdiagrams">
