@@ -3,13 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
-
+using TT.EFModels;
+using TT.Models;
 namespace TT.Models
 {
     public class Model_PasswordReset
     {
+        //public AccountData_Table accountData_Table { get; set; }
+        private LineAtDBEntities DB = new LineAtDBEntities();
        
 
+        public string ComfirmEmail(string strEmail,string strEmployeeId)
+        {
+            //根據前端輸入的email及員工編號判斷資料庫裡是否有存在此員工
+            var result = DB.AccountData_Table.Where(a => a.account_email == strEmail && a.account_employee_id == strEmployeeId).FirstOrDefault();
+        if (result == null)
+            {
+                throw new Exception("查無此信箱，請確認您輸入的員工編號或信箱是否正確");
+            }
+            
+            else
+            {
+                return "已發送密碼重置信件";
+            }
+        }
         public void SaveResetTokenToDatabase(string email, string resetToken)
         {
             // 將token+用戶電子信箱存到資料庫

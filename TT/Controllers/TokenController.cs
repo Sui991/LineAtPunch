@@ -38,7 +38,7 @@ namespace TT.Controllers
 throw new Exception("登入失敗，帳號或密碼錯誤");
 
             }
-            var user = new User {Id=c_id+=1,UserEmail=model.employee.account_email,UserName=model.employee.account_name,Identity=Identity.User,auth_employeeId=model.auth_employeeid };
+            var user = new User {Id=c_id+=1,UserEmail=model.employee.account_email,UserName=model.employee.account_name,auth_employeeId=model.auth_employeeid,auth_accountType= model.auth_memberType.ToString() };
             //產生 Token
             var token = _tokenManager.Create(user);
             //需存入資料庫

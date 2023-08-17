@@ -8,7 +8,7 @@ namespace TT.Controllers
     {
         // GET: ForgetPassword
         [HttpGet]
-        public IHttpActionResult ForgotPassword(string strEmail)
+        public IHttpActionResult ForgotPassword(string employeeId ,string strEmail)
         {
             // 處理忘記密碼請求
             // 驗證用戶提供的電子信箱是否有效，並找到匹配的用戶帳戶

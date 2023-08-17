@@ -9,7 +9,7 @@ namespace TT.Models
     {
         private LineAtDBEntities DB = new LineAtDBEntities();
         public AccountData_Table UpdateData { get; set; }
-        public List<AccountData_Table> AllData { get; set; }
+        public List<AccountData_Table> AllData{get;set;}
         public Model_AccountEdit()
         {
             NewAccountData newAccountData = new NewAccountData();
@@ -24,10 +24,10 @@ namespace TT.Models
             public int NewaccountTypeId { get; set; }
             public string NewName { get; set; }
             public string NewPhone { get; set; }
-
             public int id { get; set; }
             public string NewPosition { get; set; }
         }
+
         public void GetAccount(string employeeId)
         {
             this.UpdateData = DB.AccountData_Table.Where(x => x.account_employee_id == employeeId).FirstOrDefault();
@@ -36,7 +36,9 @@ namespace TT.Models
         public void GetAllAccount()
         {
             this.AllData = DB.AccountData_Table.ToList();
+            
         }
+
         public void UserEditAccount(NewAccountData newAccountData)
         {
             //一般使用者只能更新信箱、密碼、電話號碼
@@ -59,6 +61,7 @@ namespace TT.Models
         {
             //管理者擁有所有更新權限
             //若前端傳過來的值不為空的話 更新帳戶資料
+
             this.UpdateData = AllData.Where(a => a.id == newAccountData.id).FirstOrDefault();
 
             if (!string.IsNullOrEmpty(newAccountData.NewPassword))

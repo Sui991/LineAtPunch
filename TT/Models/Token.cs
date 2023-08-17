@@ -27,6 +27,7 @@ namespace TT.Models
         public int exp { get; set; }
         public string auth_employeeId { get; set; }
 
+        public string auth_memberType { get; set; }
     }
     public static class TokenCrypto
     {
@@ -100,7 +101,8 @@ namespace TT.Models
                 exp = Convert.ToInt32(
                     (DateTime.Now.AddSeconds(exp) -
                      new DateTime(1970, 1, 1)).TotalSeconds),
-                auth_employeeId = user.auth_employeeId           
+                auth_employeeId = user.auth_employeeId,
+                auth_memberType = user.auth_accountType
             };
 
             var json = JsonConvert.SerializeObject(payload);
