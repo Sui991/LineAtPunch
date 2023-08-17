@@ -19,12 +19,13 @@ namespace LineAtPunch.Models
         //}
         public void GetPunchData(string strEmployeeID, int intId)
         {
-            //根據登入的員工編號 只能修改對應的員工編號 不能改其他人的打卡紀錄
+            //根據登入的員工編號 只能修改對應的員工編號 不能改其他人的打卡紀錄 
             var editData = DB.vw_PunchRecord.Where(x => x.vw_employee == strEmployeeID && x.id == intId).FirstOrDefault();
             this.UpdateData = DB.PunchRecord_Table.Where(x => x.id == editData.id).FirstOrDefault();
         }
         public void EditPunch(string notes, string img, int type)
         {
+            //只能修改照片 打卡類型 備註
             if (!string.IsNullOrEmpty(notes))
             {
                 this.UpdateData.punch_notes = notes;
